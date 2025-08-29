@@ -19,18 +19,18 @@ public class ProductService {
      */
     private void loadProducts(){
         products.add(new Product("Computer", "Macbook Air", 1, 12000, 12));
-        products.add(new Product("Phone", "Iphone", 1, 12000, 12));
-        products.add(new Product("Monitor", "AOC", 1, 12000, 12));
+        products.add(new Product("Phone", "Iphone", 2, 13000, 20));
+        products.add(new Product("Monitor", "AOC", 3, 120, 2));
     }
 
     //CRUD
     /**
-     * This method allows you to add a new product
+     * This method allows you to add a new product avoiding the use of equal ids
      * @param product the product you want to add
      * @return the product added. 
      */
     public Product addProduct(Product product){
-        if(products.contains(product)){
+        if(products.contains(product) || products.stream().anyMatch(x -> x.getId() == product.getId())){
             throw new ProductInExistenceException("The product " + product.getName() + " Already exists");
         }
 
@@ -52,6 +52,11 @@ public class ProductService {
         }else{
             throw new ProductNotFoundException("The product with the specified id wasn't found");
         }
+    }
+
+    public ArrayList<Product> allProducts(){
+        //return (ArrayList<Product>) products; 
+        return new ArrayList<>(products);
     }
 
     /**
