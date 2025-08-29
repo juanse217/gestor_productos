@@ -1,5 +1,8 @@
 package com.sebastian.model;
 
+/**
+ * This class allows you to model a Product with some basic parameters. The ID is the primary key. 
+ */
 public class Product {
     private String name; 
     private String description;
